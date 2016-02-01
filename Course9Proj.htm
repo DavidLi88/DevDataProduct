@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Simulation for exponential distribution with Shiny</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Simulation for exponential distribution with Shiny">
+  <meta name="author" content="David Li">
+  <meta name="generator" content="slidify">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="Course9Proj_files/default.css" media="all">
+  <link rel="stylesheet" href="Course9Proj_files/phone.css" media="only screen and (max-device-width: 480px)">
+  <link rel="stylesheet" href="Course9Proj_files/slidify.css">
+  <link rel="stylesheet" href="Course9Proj_files/tomorrow.css">
+  <script src="Course9Proj_files/slides.js" data-requiremodule="slides" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/order.js" data-requiremodule="order" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/slide_config.js" data-requiremodule="slide_config" data-requirecontext="_" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/modernizr.js" data-requiremodule="modernizr.custom.45394" data-requirecontext="_" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/hammer.js" data-requiremodule="hammer" data-requirecontext="_" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/slide-controller.js" data-requiremodule="slide-controller" data-requirecontext="_" charset="utf-8" type="text/javascript"></script><script src="Course9Proj_files/slide-deck.js" data-requiremodule="slide-deck" data-requirecontext="_" charset="utf-8" type="text/javascript"></script><!-- base href="file:///C:/Users/Administrator/Documents/mydeck/index.html" --> <!-- This amazingness opens all links in a new tab. -->  <link rel="stylesheet" href="Course9Proj_files/ribbons.css">
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="Course9Proj_files/jquery-1.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" src="Course9Proj_files/require-1.js">
+  </script>
+  
+  
+
+<link href="Course9Proj_files/css.css" rel="stylesheet"></head>
+<body class="loaded" style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide data-total-slides="5" data-slide-num="1" class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Simulation for exponential distribution with Shiny</h1>
+    <h2></h2>
+    <p>David Li<br></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide data-total-slides="5" data-slide-num="2" class="far-past" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Simulation for exponential distribution with Shiny</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>ddd</p>
+
+<ul>
+<li><p>In Coursera Data Science course 6 - Statistical Inference Project
+ Part 1, I had investigated the exponential distribution in R and 
+compare it with the Central Limit Theorem. The exponential distribution 
+can be simulated in R with rexp(n, lambda) where lambda is the rate 
+parameter. The mean of exponential distribution is 1/lambda and the 
+standard deviation is also 1/lambda.</p></li>
+<li><p>I have deveoped a Shiny app <a href="https://davidli88.shinyapps.io/Course9Proj/">https://davidli88.shinyapps.io/Course9Proj/</a>
+ to determine if the more number of exponentials or number of 
+simulations, the closer of the simulation center to the theoretical 
+center.</p></li>
+<li><p>In this Shiny app, you can play with different settings for 
+lambda or the number of Exponentials or the number of simulations to 
+find out if more Exponentials or simulations, the averages of samples 
+follow normal distribution.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide data-total-slides="5" data-slide-num="3" class="past" id="slide-2" style="background:;">
+  <hgroup>
+    <h3>ui.R</h3>
+  </hgroup>
+  <article data-timings="">
+    <h5>sidebarPanel</h5>
+
+<pre><code class="rsl">sliderInput(<span class="string">'lambda'</span>, <span class="string">'lambda'</span>, <span class="built_in">min</span>=<span class="number">0.01</span>, <span class="built_in">max</span>=<span class="number">10</span>,
+            value=<span class="number">0.2</span>, <span class="built_in">step</span>=<span class="number">0.01</span>),
+sliderInput(<span class="string">'ExpNum'</span>, <span class="string">'Number of Exponentials'</span>, <span class="built_in">min</span>=<span class="number">10</span>, <span class="built_in">max</span>=<span class="number">500</span>,
+            value=<span class="number">40</span>, <span class="built_in">step</span>=<span class="number">10</span>, <span class="built_in">round</span>=<span class="number">0</span>),
+sliderInput(<span class="string">'SimuNum'</span>, <span class="string">'Number of Simulations'</span>, <span class="built_in">min</span>=<span class="number">10</span>, <span class="built_in">max</span>=<span class="number">10000</span>,
+            value=<span class="number">1000</span>, <span class="built_in">step</span>=<span class="number">10</span>, <span class="built_in">round</span>=<span class="number">0</span>),
+checkboxInput(<span class="string">'showQQ'</span>, <span class="string">'Show Normal Q-Q Plot'</span>)
+</code></pre>
+
+<h5>mainPanel</h5>
+
+<pre><code class="erlang"><span class="function"><span class="title">plotOutput</span><span class="params">('hist<span class="variable">Plot</span>')</span>,
+<span class="title">plotOutput</span><span class="params">('qq<span class="variable">Plot</span>')</span>
+</span></code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide data-total-slides="5" data-slide-num="4" class="current" id="slide-3" style="background:;">
+  <hgroup>
+    <h3>server.R</h3>
+  </hgroup>
+  <article data-timings="">
+    <h4>output$histPlot</h4>
+
+<pre><code class="erlang"><span class="function"><span class="title">hist</span><span class="params">(row_means, breaks=<span class="number">50</span>, prob=<span class="variable">TRUE</span>,
+     main=<span class="function_name">paste</span>(<span class="string">"Density of means"</span>), 
+     xlab=<span class="function_name">paste</span>(<span class="string">"Theoretical center "</span>,<span class="function_name">round</span>(<span class="number">1</span>/lambda,<span class="number">4</span>),<span class="string">" vs Simulation center "</span>,<span class="function_name">round</span>(mean_simu,<span class="number">4</span>)), 
+     ylab=<span class="string">"Density"</span>,
+     col=<span class="string">"lightblue"</span>)</span>
+</span></code></pre>
+
+<h4>output$qqPlot</h4>
+
+<pre><code class="erlang"><span class="function"><span class="title">if</span> <span class="params">(input$show<span class="variable">QQ</span>)</span> {
+  <span class="title">qqnorm</span><span class="params">(row_means)</span>
+  <span class="title">qqline</span><span class="params">(row_means, col = <span class="number">2</span>)</span>
+}
+</span></code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide data-total-slides="5" data-slide-num="5" class="next" id="slide-4" style="background:;">
+  <article data-timings="">
+    <p><img src="Course9Proj_files/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+<p><img src="Course9Proj_files/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id="io2012-ptoc" style="display:none;">
+    <ul>
+      <li class="">
+      <a href="#" target="_self" rel="tooltip" data-slide="1" title="Simulation for exponential distribution with Shiny">
+         1
+      </a>
+    </li>
+    <li class="active">
+      <a href="#" target="_self" rel="tooltip" data-slide="2" title="ui.R">
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel="tooltip" data-slide="3" title="server.R">
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel="tooltip" data-slide="4" title="NA">
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+
+  
+  
+  
+  <script src="Course9Proj_files/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </body><!-- Load Javascripts for Widgets --><!-- LOAD HIGHLIGHTER JS FILES --></html>
