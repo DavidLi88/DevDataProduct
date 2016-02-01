@@ -12,7 +12,6 @@ knit        : slidify::knit2slides
 ---
 
 ## Simulation for exponential distribution with Shiny
-ddd
 * In Coursera Data Science course 6 - Statistical Inference Project Part 1, I had investigated the exponential distribution in R and compare it with the Central Limit Theorem. The exponential distribution can be simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also 1/lambda.
 
 * I have deveoped a Shiny app [https://davidli88.shinyapps.io/Course9Proj/](https://davidli88.shinyapps.io/Course9Proj/) to determine if the more number of exponentials or number of simulations, the closer of the simulation center to the theoretical center.
