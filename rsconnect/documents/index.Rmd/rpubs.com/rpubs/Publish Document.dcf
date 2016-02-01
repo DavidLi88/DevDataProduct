@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/149327/604f4736e95746e29e10df9229dc230a
+url: http://rpubs.com/DavidLi/149327
+when: 1454293266.08389
